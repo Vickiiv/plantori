@@ -3,11 +3,13 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.routes';
 import { errorHandler } from './middleware/errorHandler';
+import { notFound } from './middleware/notFound';
+import { env } from './config/env';
 
 const app = express();
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: env.CLIENT_URL,
   credentials: true,
 }));
 app.use(express.json());
@@ -19,6 +21,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
+app.use(notFound);
 app.use(errorHandler);
 
 export default app;

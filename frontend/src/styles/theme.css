@@ -110,6 +110,65 @@ body {
   text-decoration: none;
 }
 
+.auth-message {
+  color: var(--color-text);
+  font-size: 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 16px 0 0;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 380px;
+  margin-top: 16px;
+}
+
+.account-form label {
+  font-size: 13px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  color: var(--color-text-muted);
+}
+
+.account-form input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.account-form button {
+  margin-top: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.danger-button {
+  padding: 10px 20px;
+  border: 1px solid var(--color-error);
+  border-radius: 8px;
+  background: none;
+  color: var(--color-error);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.danger-button:hover {
+  background: var(--color-error);
+  color: white;
+}
+
 .page-center {
   min-height: 100vh;
   display: flex;

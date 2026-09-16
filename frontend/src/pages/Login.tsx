@@ -32,6 +32,10 @@ export function Login() {
         <label htmlFor="password">Passwort</label>
         <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
+        <p style={{ textAlign: 'right', fontSize: 13, marginTop: 8 }}>
+          <Link to="/forgot-password" style={{ color: 'var(--color-primary)' }}>Passwort vergessen?</Link>
+        </p>
+
         {error && <p className="auth-error">{error}</p>}
 
         <button type="submit">Anmelden</button>

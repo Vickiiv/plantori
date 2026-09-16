@@ -1,12 +1,9 @@
 import mongoose from 'mongoose';
+import { env } from './env';
 
 export async function connectDB(): Promise<void> {
-  const uri = process.env.MONGO_URI;
-  if (!uri) {
-    throw new Error('MONGO_URI fehlt in der .env Datei');
-  }
   try {
-    await mongoose.connect(uri);
+    await mongoose.connect(env.MONGO_URI);
     console.log('MongoDB verbunden');
   } catch (error) {
     console.error('MongoDB-Verbindung fehlgeschlagen:', error);

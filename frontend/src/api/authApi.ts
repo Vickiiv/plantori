@@ -4,6 +4,8 @@ export interface AuthUser {
   id: string;
   name: string;
   email: string;
+  role: string;
+  isVerified: boolean;
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
@@ -45,4 +47,47 @@ export function logoutRequest() {
 
 export function getMeRequest() {
   return request<{ user: AuthUser }>('/auth/me');
+}
+
+export function forgotPasswordRequest(email: string) {
+  return request<{ message: string }>('/auth/forgot-password', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+}
+
+export function resetPasswordRequest(token: string, newPassword: string) {
+  return request<{ message: string }>('/auth/reset-password', {
+    method: 'POST',
+    body: JSON.stringify({ token, newPassword }),
+  });
+}
+
+export function verifyEmailRequest(token: string) {
+  return request<{ message: string }>(`/auth/verify?token=${encodeURIComponent(token)}`);
+}
+
+export function resendVerificationRequest() {
+  return request<{ message: string }>('/auth/resend-verification', { method: 'POST' });
+}
+
+export function changePasswordRequest(currentPassword: string, newPassword: string) {
+  return request<{ message: string }>('/auth/password', {
+    method: 'PATCH',
+    body: JSON.stringify({ currentPassword, newPassword }),
+  });
+}
+
+export function changeEmailRequest(newEmail: string, currentPassword: string) {
+  return request<{ message: string }>('/auth/change-email', {
+    method: 'POST',
+    body: JSON.stringify({ newEmail, currentPassword }),
+  });
+}
+
+export function deleteAccountRequest(password: string) {
+  return request<{ message: string }>('/auth/me', {
+    method: 'DELETE',
+    body: JSON.stringify({ password }),
+  });
 }
