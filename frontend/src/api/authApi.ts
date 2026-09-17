@@ -80,6 +80,13 @@ export function changePasswordRequest(currentPassword: string, newPassword: stri
   });
 }
 
+export function updateProfileRequest(name: string) {
+  return request<{ message: string; user: AuthUser }>('/auth/profile', {
+    method: 'PATCH',
+    body: JSON.stringify({ name }),
+  });
+}
+
 export function changeEmailRequest(newEmail: string, currentPassword: string) {
   return request<{ message: string }>('/auth/change-email', {
     method: 'POST',

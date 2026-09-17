@@ -1,25 +1,65 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { changePasswordRequest, deleteAccountRequest } from '../api/authApi';
+import { changeEmailRequest, changePasswordRequest, deleteAccountRequest, updateProfileRequest } from '../api/authApi';
 import { APP_NAME } from '../config';
 import { Logo } from '../components/Logo';
 import { PasswordInput } from '../components/PasswordInput';
-import { errorClass, labelClass, messageClass } from '../styles/formClasses';
+import { errorClass, inputClass, labelClass, messageClass } from '../styles/formClasses';
 
 export function Account() {
-  const { user, logout } = useAuth();
+  const { user, logout, refreshUser } = useAuth();
   const navigate = useNavigate();
 
+  // Name aendern
+  const [name, setName] = useState(user?.name ?? '');
+  const [nameError, setNameError] = useState('');
+  const [nameMessage, setNameMessage] = useState('');
+
+  // Email aendern (Bestaetigung per Mail, siehe requestEmailChange im Backend)
+  const [newEmail, setNewEmail] = useState('');
+  const [emailChangePassword, setEmailChangePassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [emailMessage, setEmailMessage] = useState('');
+
+  // Passwort aendern
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
+  // Konto loeschen
   const [deletePassword, setDeletePassword] = useState('');
   const [deleteError, setDeleteError] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
+
+  async function handleNameChange(e: FormEvent) {
+    e.preventDefault();
+    setNameError('');
+    setNameMessage('');
+    try {
+      const data = await updateProfileRequest(name);
+      setNameMessage(data.message);
+      await refreshUser();
+    } catch (err) {
+      setNameError(err instanceof Error ? err.message : 'Etwas ist schiefgelaufen');
+    }
+  }
+
+  async function handleEmailChange(e: FormEvent) {
+    e.preventDefault();
+    setEmailError('');
+    setEmailMessage('');
+    try {
+      const data = await changeEmailRequest(newEmail, emailChangePassword);
+      setEmailMessage(data.message);
+      setNewEmail('');
+      setEmailChangePassword('');
+    } catch (err) {
+      setEmailError(err instanceof Error ? err.message : 'Etwas ist schiefgelaufen');
+    }
+  }
 
   async function handlePasswordChange(e: FormEvent) {
     e.preventDefault();
@@ -73,6 +113,63 @@ export function Account() {
         </p>
 
         <section className="mt-8">
+          <h2 className="text-lg font-medium text-ink">Profil</h2>
+
+          <form onSubmit={handleNameChange} className="mt-4 flex max-w-sm flex-col">
+            <label htmlFor="name" className={labelClass}>Name</label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className={inputClass}
+            />
+
+            {nameError && <p className={errorClass}>{nameError}</p>}
+            {nameMessage && <p className={messageClass}>{nameMessage}</p>}
+
+            <button
+              type="submit"
+              className="mt-4 w-fit rounded-lg bg-primary px-5 py-2.5 font-medium text-white hover:bg-primary-dark"
+            >
+              Name speichern
+            </button>
+          </form>
+
+          <form onSubmit={handleEmailChange} className="mt-6 flex max-w-sm flex-col">
+            <label htmlFor="newEmail" className={labelClass}>Neue E-Mail-Adresse</label>
+            <input
+              id="newEmail"
+              type="email"
+              placeholder={user?.email}
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              required
+              className={inputClass}
+            />
+
+            <label htmlFor="emailChangePassword" className={labelClass}>Aktuelles Passwort zur Bestätigung</label>
+            <PasswordInput
+              id="emailChangePassword"
+              value={emailChangePassword}
+              onChange={(e) => setEmailChangePassword(e.target.value)}
+              required
+            />
+
+            {emailError && <p className={errorClass}>{emailError}</p>}
+            {emailMessage && <p className={messageClass}>{emailMessage}</p>}
+
+            <button
+              type="submit"
+              className="mt-4 w-fit rounded-lg bg-primary px-5 py-2.5 font-medium text-white hover:bg-primary-dark"
+            >
+              Bestätigungs-E-Mail anfordern
+            </button>
+          </form>
+        </section>
+
+        <section className="mt-10">
           <h2 className="text-lg font-medium text-ink">Passwort ändern</h2>
           <form onSubmit={handlePasswordChange} className="mt-4 flex max-w-sm flex-col">
             <label htmlFor="currentPassword" className={labelClass}>Aktuelles Passwort</label>

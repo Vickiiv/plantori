@@ -33,6 +33,7 @@ auth-starter/
 - Eingeloggt Passwort ändern (invalidiert alte Sitzungen automatisch)
 - E-Mail-Adresse ändern (mit Bestätigung der neuen Adresse)
 - Konto löschen (Soft-Delete + Anonymisierung)
+- Name ändern (eigener Endpunkt, unabhängig von der E-Mail-Änderung)
 - Rate-Limiting auf Login/Registrierung/sensible Aktionen
 - Account-Sperre nach 5 fehlgeschlagenen Login-Versuchen (15 Minuten)
 - Input-Validierung mit Zod
@@ -85,6 +86,7 @@ Beide müssen gleichzeitig laufen.
 | POST    | `/api/auth/forgot-password`   | Passwort-Reset-Mail anfordern                | Nein      |
 | POST    | `/api/auth/reset-password`    | Passwort mit Token zurücksetzen              | Nein      |
 | PATCH   | `/api/auth/password`          | Eingeloggt Passwort ändern                   | Ja        |
+| PATCH   | `/api/auth/profile`           | Name ändern                                  | Ja        |
 | POST    | `/api/auth/change-email`      | Neue E-Mail anfragen (Bestätigung nötig)     | Ja        |
 | DELETE  | `/api/auth/me`                | Konto löschen (Soft-Delete)                  | Ja        |
 

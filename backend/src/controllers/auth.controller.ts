@@ -14,6 +14,7 @@ import type { ResetPasswordInput } from '../validation/resetPasswordSchema';
 import type { VerifyEmailQuery } from '../validation/verifyEmailSchema';
 import type { ChangeEmailInput } from '../validation/changeEmailSchema';
 import type { DeleteAccountInput } from '../validation/deleteAccountSchema';
+import type { UpdateProfileInput } from '../validation/updateProfileSchema';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -264,6 +265,25 @@ export async function changePassword(req: AuthRequest, res: Response, next: Next
     await user.save({ validateModifiedOnly: true });
 
     res.json({ message: 'Passwort erfolgreich geaendert' });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Name aendern
+export async function updateProfile(req: AuthRequest, res: Response, next: NextFunction) {
+  try {
+    const { name } = req.body as UpdateProfileInput;
+
+    const user = await User.findById(req.userId);
+    if (!user) {
+      throw new AppError(404, 'USER_NOT_FOUND', 'Benutzer nicht gefunden');
+    }
+
+    user.name = name;
+    await user.save({ validateModifiedOnly: true });
+
+    res.json({ message: 'Profil aktualisiert', user: publicUser(user) });
   } catch (error) {
     next(error);
   }

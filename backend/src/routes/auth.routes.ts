@@ -9,6 +9,7 @@ import {
   forgotPassword,
   resetPassword,
   changePassword,
+  updateProfile,
   requestEmailChange,
   deleteAccount,
 } from '../controllers/auth.controller';
@@ -22,6 +23,7 @@ import { resetPasswordSchema } from '../validation/resetPasswordSchema';
 import { verifyEmailQuerySchema } from '../validation/verifyEmailSchema';
 import { changeEmailSchema } from '../validation/changeEmailSchema';
 import { deleteAccountSchema } from '../validation/deleteAccountSchema';
+import { updateProfileSchema } from '../validation/updateProfileSchema';
 import { loginRateLimiter, registerRateLimiter, sensitiveActionLimiter } from '../middleware/rateLimiter';
 
 const router = Router();
@@ -38,6 +40,7 @@ router.post('/forgot-password', sensitiveActionLimiter, validate(forgotPasswordS
 router.post('/reset-password', sensitiveActionLimiter, validate(resetPasswordSchema), resetPassword);
 
 router.patch('/password', requireAuth, validate(changePasswordSchema), changePassword);
+router.patch('/profile', requireAuth, validate(updateProfileSchema), updateProfile);
 router.post('/change-email', requireAuth, sensitiveActionLimiter, validate(changeEmailSchema), requestEmailChange);
 router.delete('/me', requireAuth, validate(deleteAccountSchema), deleteAccount);
 
