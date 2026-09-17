@@ -6,4 +6,4 @@
 // werden, weil sie keine .ts-Datei importieren koennen:
 //   - frontend/index.html            -> <title>App-Name</title>
 //   - backend/src/utils/sendEmail.ts -> APP_NAME-Konstante fuer die Email-Texte
-export const APP_NAME = 'App-Name';
+export const APP_NAME = 'Plantori';
