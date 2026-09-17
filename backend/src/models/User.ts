@@ -26,6 +26,9 @@ const userSchema = new Schema<IUser>({
   password: { type: String, required: true, select: false },
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
   isVerified: { type: Boolean, default: false },
+  // ANPASSEN: ab hier eigene, projektspezifische Felder ergaenzen
+  // (z.B. avatarUrl, settings, onboardingCompleted). Felder mit
+  // vertraulichem Inhalt nach dem Vorbild oben mit select:false schuetzen.
   verificationToken: { type: String, select: false },
   verificationTokenExpires: { type: Date, select: false },
   pendingEmail: { type: String, select: false },

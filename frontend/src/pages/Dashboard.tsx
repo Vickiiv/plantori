@@ -23,8 +23,10 @@ export function Dashboard() {
           <p className={messageClass}>Bitte bestätige deine E-Mail-Adresse – schau in dein Postfach.</p>
         )}
 
+        {/* ANPASSEN: Ab hier faengt die eigentliche App an - dieser gesamte
+            <main>-Block ist nur ein Platzhalter. */}
         <p className="mt-4 text-muted">
-          Platzhalter-Bereich – hier entstehen später Wochenplaner, Ziele und Timer.
+          Platzhalter-Bereich – hier beginnt der eigentliche Inhalt der App.
         </p>
       </main>
     </div>

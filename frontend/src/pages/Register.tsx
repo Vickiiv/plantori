@@ -33,7 +33,12 @@ export function Register() {
   }
 
   return (
-    <AuthLayout activeTab="register" title="Konto erstellen" subtitle={`Starte jetzt mit ${APP_NAME}.`}>
+    <AuthLayout
+      activeTab="register"
+      // ANPASSEN: Titel - reiner Textinhalt, kein Code (Untertitel nutzt APP_NAME automatisch)
+      title="Konto erstellen"
+      subtitle={`Starte jetzt mit ${APP_NAME}.`}
+    >
       <form onSubmit={handleSubmit}>
         <label htmlFor="name" className={labelClass}>Name</label>
         <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required className={inputClass} />

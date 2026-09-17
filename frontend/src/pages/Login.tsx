@@ -24,7 +24,12 @@ export function Login() {
   }
 
   return (
-    <AuthLayout activeTab="login" title="Willkommen zurück" subtitle="Melde dich an, um weiterzumachen.">
+    <AuthLayout
+      activeTab="login"
+      // ANPASSEN: Titel/Untertitel - reine Textinhalte, kein Code
+      title="Willkommen zurück"
+      subtitle="Melde dich an, um weiterzumachen."
+    >
       <form onSubmit={handleSubmit}>
         <label htmlFor="email" className={labelClass}>E-Mail</label>
         <input

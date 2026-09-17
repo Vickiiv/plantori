@@ -1,3 +1,5 @@
+// ANPASSEN fuer Produktion: VITE_API_URL in einer .env-Datei im frontend-Ordner
+// auf die echte Backend-URL setzen (z.B. https://mein-projekt.onrender.com/api)
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
 
 export interface AuthUser {

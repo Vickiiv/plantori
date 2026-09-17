@@ -1,21 +1,38 @@
 @import "tailwindcss";
 
 /*
- * Design-Tokens fuer den Auth-Starter. Jede --color-* Variable erzeugt
- * automatisch Tailwind-Utilities (bg-primary, text-ink, border-line, ...).
- * Beim Anpassen fuer ein konkretes Projekt: nur diese Werte aendern,
- * der Rest der Komponenten bleibt unveraendert.
+ * ---------------------------------------------------------------------
+ * ANPASSEN: Design-Tokens fuer den Auth-Starter.
+ *
+ * Jede --color-* Variable erzeugt automatisch die passenden Tailwind-
+ * Utilities, z.B. wird aus --color-primary die Klasse bg-primary /
+ * text-primary / border-primary. Beim Reskinning fuer ein neues Projekt
+ * NUR die Werte hier unten aendern - alle Komponenten (AuthLayout,
+ * Login, Register, Dashboard, Account, formClasses.ts, ...) beziehen
+ * ihre Farben ausschliesslich ueber diese Tokens, nirgendwo sind Hex-
+ * Werte direkt in Komponenten hartcodiert.
+ * ---------------------------------------------------------------------
  */
 @theme {
+  /* Hauptfarbe: Buttons, aktiver Tab, linkes Seitenpanel, Links */
   --color-primary: #7c6fd1;
+  /* Hover-/Fokus-Variante der Hauptfarbe (etwas dunkler) */
   --color-primary-dark: #5b4fc4;
+  /* Seitenhintergrund (hinter Karten/Formularen) */
   --color-canvas: #faf8f4;
+  /* Hintergrund von Karten, Inputs, Headern - i. d. R. Weiss */
   --color-surface: #ffffff;
+  /* Haupt-Textfarbe (Ueberschriften, Fliesstext) */
   --color-ink: #2e2b26;
+  /* Gedaempfte Textfarbe (Hilfetexte, Platzhalter, sekundaere Labels) */
   --color-muted: #6b6860;
+  /* Reserve-Akzentfarbe - aktuell ungenutzt, fuer Hervorhebungen gedacht */
   --color-accent: #e08a6b;
+  /* Rahmenfarbe fuer Inputs, Karten, Trennlinien */
   --color-line: #e5e1d8;
+  /* Fehler- und Lösch-Aktionen (z.B. "Konto loeschen") */
   --color-danger: #c94f4f;
+  /* Schriftart - siehe auch den Google-Fonts-Link in index.html */
   --font-sans: 'Inter', -apple-system, sans-serif;
 }
 

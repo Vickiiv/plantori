@@ -27,6 +27,8 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          {/* ANPASSEN: weitere Routen der eigentlichen App hier ergaenzen,
+              mit <ProtectedRoute> umschliessen, wenn Login noetig ist */}
           <Route
             path="/account"
             element={
