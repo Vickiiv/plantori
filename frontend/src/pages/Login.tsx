@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { AuthLayout } from '../components/AuthLayout';
+import { PasswordInput } from '../components/PasswordInput';
 
 export function Login() {
   const { login } = useAuth();
@@ -21,19 +23,28 @@ export function Login() {
   }
 
   return (
-    <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h1>Willkommen zurück</h1>
-        <p className="auth-subtitle">Melde dich bei App-Name an</p>
-
+    <AuthLayout activeTab="login" title="Willkommen zurück" subtitle="Melde dich an, um weiterzumachen.">
+      <form onSubmit={handleSubmit}>
         <label htmlFor="email">E-Mail</label>
-        <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input
+          id="email"
+          type="email"
+          placeholder="name@beispiel.de"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
         <label htmlFor="password">Passwort</label>
-        <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <PasswordInput
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-        <p style={{ textAlign: 'right', fontSize: 13, marginTop: 8 }}>
-          <Link to="/forgot-password" style={{ color: 'var(--color-primary)' }}>Passwort vergessen?</Link>
+        <p className="auth-forgot">
+          <Link to="/forgot-password">Passwort vergessen?</Link>
         </p>
 
         {error && <p className="auth-error">{error}</p>}
@@ -44,6 +55,6 @@ export function Login() {
           Noch kein Konto? <Link to="/register">Registrieren</Link>
         </p>
       </form>
-    </div>
+    </AuthLayout>
   );
 }

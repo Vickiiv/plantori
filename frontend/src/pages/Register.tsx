@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { AuthLayout } from '../components/AuthLayout';
+import { PasswordInput } from '../components/PasswordInput';
 
 export function Register() {
   const { register } = useAuth();
@@ -8,11 +10,18 @@ export function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [error, setError] = useState('');
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError('');
+
+    if (password !== passwordConfirm) {
+      setError('Die Passwörter stimmen nicht überein.');
+      return;
+    }
+
     try {
       await register(name, email, password);
       navigate('/dashboard');
@@ -22,19 +31,38 @@ export function Register() {
   }
 
   return (
-    <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h1>Konto erstellen</h1>
-        <p className="auth-subtitle">Starte mit App-Name</p>
-
+    <AuthLayout activeTab="register" title="Konto erstellen" subtitle="Starte jetzt mit App-Name.">
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
 
         <label htmlFor="email">E-Mail</label>
-        <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input
+          id="email"
+          type="email"
+          placeholder="name@beispiel.de"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
         <label htmlFor="password">Passwort</label>
-        <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={8} />
+        <PasswordInput
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          minLength={8}
+        />
+
+        <label htmlFor="passwordConfirm">Passwort wiederholen</label>
+        <PasswordInput
+          id="passwordConfirm"
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+          required
+          minLength={8}
+        />
 
         {error && <p className="auth-error">{error}</p>}
 
@@ -44,6 +72,6 @@ export function Register() {
           Schon ein Konto? <Link to="/login">Anmelden</Link>
         </p>
       </form>
-    </div>
+    </AuthLayout>
   );
 }

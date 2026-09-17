@@ -25,6 +25,8 @@ auth-starter/
 - Input-Validierung mit Zod
 - Zentrale Fehlerbehandlung (`AppError`) + 404-Handler
 - `role`-Feld am User (aktuell ungenutzt, aber vorbereitet)
+- Login/Registrierung als Split-Screen mit Tab-Umschalter (`frontend/src/components/AuthLayout.tsx`),
+  Passwort-Sichtbarkeits-Toggle (`PasswordInput.tsx`) und Passwort-Wiederholung bei der Registrierung
 
 ## Setup
 
@@ -67,12 +69,15 @@ Beide müssen gleichzeitig laufen.
 1. Ganzen Ordner kopieren, in beiden `package.json`-Dateien den Namen anpassen
 2. Projektweit nach `App-Name` suchen und durch den echten Projektnamen ersetzen
    (steckt in `index.html`, den Auth-Seiten und den Email-Templates in `sendEmail.ts`)
-3. Backend: neue `MONGO_URI`, neuen `JWT_SECRET` und ein neues Resend-Projekt samt
+3. In `frontend/src/components/AuthLayout.tsx` die drei Konstanten `HEADLINE`, `DESCRIPTION`
+   und `BULLETS` durch den echten Claim/Value-Pitch des Projekts ersetzen, sowie das Logo-Kürzel
+4. Backend: neue `MONGO_URI`, neuen `JWT_SECRET` und ein neues Resend-Projekt samt
    `RESEND_API_KEY`/`MAIL_FROM` in `.env` eintragen (niemals Secrets wiederverwenden)
-4. `backend/src/models/User.ts` um projektspezifische Felder erweitern (z. B. Profilbild)
-5. Frontend: `frontend/src/styles/theme.css` an Farben/Typografie des neuen Projekts anpassen
-6. `frontend/src/pages/Dashboard.tsx` ist nur ein Platzhalter – hier fängt die eigentliche App an
-7. Falls E-Mail-Verifizierung erzwungen werden soll: `ENFORCE_EMAIL_VERIFICATION=true` setzen
+5. `backend/src/models/User.ts` um projektspezifische Felder erweitern (z. B. Profilbild)
+6. Frontend: `frontend/src/styles/theme.css` an Farben/Typografie des neuen Projekts anpassen
+   (Farbe der linken Seite hängt an `--color-primary`)
+7. `frontend/src/pages/Dashboard.tsx` ist nur ein Platzhalter – hier fängt die eigentliche App an
+8. Falls E-Mail-Verifizierung erzwungen werden soll: `ENFORCE_EMAIL_VERIFICATION=true` setzen
    und `requireVerified`-Middleware (`backend/src/middleware/requireVerified.ts`) vor die
    betroffenen Routen hängen
 
