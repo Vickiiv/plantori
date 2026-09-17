@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { APP_NAME } from '../config';
+import { Logo } from './Logo';
 
 interface AuthLayoutProps {
   activeTab: 'login' | 'register';
@@ -27,9 +28,7 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
           komplett ausgeblendet, dort zeigt nur das rechte Formular. */}
       <aside className="hidden w-[42%] min-w-[320px] flex-col justify-between bg-primary p-8 text-white lg:flex xl:p-12">
         <div className="flex items-center gap-2.5 text-lg font-semibold">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-sm font-bold">
-            {APP_NAME[0]}
-          </span>
+          <Logo />
           <span>{APP_NAME}</span>
         </div>
 
@@ -57,9 +56,7 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
         <div className="w-full max-w-[420px] lg:max-w-[400px]">
           {/* Kompaktes Logo nur auf Mobile/Tablet, da die linke Seite dort fehlt */}
           <div className="mb-8 flex items-center justify-center gap-2 lg:hidden">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
-              {APP_NAME[0]}
-            </span>
+            <Logo />
             <span className="text-lg font-semibold text-ink">{APP_NAME}</span>
           </div>
 

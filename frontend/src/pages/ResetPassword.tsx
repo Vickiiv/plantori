@@ -32,6 +32,7 @@ export function ResetPassword() {
   return (
     <div className={cardPageClass}>
       <div className={cardClass}>
+        {/* ANPASSEN: Titel/Texte unten sind Platzhalter-Copy */}
         <h1 className="mb-6 text-2xl font-bold text-ink">Neues Passwort vergeben</h1>
 
         {isSuccess ? (

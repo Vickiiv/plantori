@@ -26,6 +26,7 @@ export function ForgotPassword() {
   return (
     <div className={cardPageClass}>
       <div className={cardClass}>
+        {/* ANPASSEN: Titel/Texte unten sind Platzhalter-Copy */}
         <h1 className="mb-1.5 text-2xl font-bold text-ink">Passwort vergessen</h1>
         <p className="mb-6 text-sm text-muted">Wir schicken dir einen Link zum Zurücksetzen</p>
 

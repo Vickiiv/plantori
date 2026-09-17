@@ -1,8 +1,9 @@
 import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { changePasswordRequest, deleteAccountRequest } from '../api/authApi';
 import { APP_NAME } from '../config';
+import { Logo } from '../components/Logo';
 import { PasswordInput } from '../components/PasswordInput';
 import { errorClass, labelClass, messageClass } from '../styles/formClasses';
 
@@ -55,11 +56,16 @@ export function Account() {
   return (
     <div className="min-h-screen">
       <header className="flex items-center justify-between border-b border-line bg-surface px-4 py-4 sm:px-8 sm:py-5">
-        <span className="text-lg font-semibold text-primary-dark">{APP_NAME}</span>
+        {/* Logo + Name fuehren zurueck zum Dashboard - vorher gab es von hier keinen Weg zurueck */}
+        <Link to="/dashboard" className="flex items-center gap-2.5 text-lg font-semibold text-primary-dark">
+          <Logo className="h-8 w-8" />
+          {APP_NAME}
+        </Link>
         <button className="text-sm text-muted hover:text-ink" onClick={() => logout()}>Abmelden</button>
       </header>
 
       <main className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-16">
+        {/* ANPASSEN: Seitentitel und Texte unten sind Platzhalter-Copy */}
         <h1 className="text-2xl font-semibold text-ink">Konto</h1>
         <p className="mt-4 break-words text-muted">
           Angemeldet als {user?.email}

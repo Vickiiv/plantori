@@ -31,6 +31,7 @@ export function VerifyEmail() {
   return (
     <div className={cardPageClass}>
       <div className={`${cardClass} text-center`}>
+        {/* ANPASSEN: Status-Texte unten sind Platzhalter-Copy */}
         {status === 'loading' && <p className="text-muted">E-Mail wird bestätigt …</p>}
 
         {status === 'success' && (

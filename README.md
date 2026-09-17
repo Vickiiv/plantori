@@ -4,6 +4,19 @@ Wiederverwendbare Basis für Login/Registrierung (Backend + Frontend) – gedach
 um sie bei jedem neuen Solo-Projekt zu kopieren und anzupassen, statt Auth
 jedes Mal neu zu bauen.
 
+## Auf einen Blick
+
+- **Backend:** Express + TypeScript + MongoDB/Mongoose. Kompletter Auth-Flow
+  (Registrierung, Login, E-Mail-Verifizierung, Passwort-Reset, Passwort/Email
+  ändern, Konto löschen) inklusive Rate-Limiting, Account-Sperre und
+  Zod-Validierung – siehe [Backend-Features](#backend-features).
+- **Frontend:** React + TypeScript (Vite) + Tailwind CSS v4. Login/Registrierung
+  als Split-Screen mit Tab-Umschalter, passende Seiten für alle Backend-Flows,
+  responsive (Mobile/Tablet/Desktop) – siehe [Frontend-Features](#frontend-features).
+- **Zum Anpassen:** jede Stelle, an der du für ein neues Projekt etwas ändern
+  musst, ist im Code mit `// ANPASSEN:` markiert – Übersicht dazu weiter unten
+  unter [Wo du was anpassen kannst](#wo-du-was-anpassen-kannst).
+
 ## Struktur
 
 ```
@@ -12,7 +25,7 @@ auth-starter/
 └── frontend/    React + TypeScript (Vite) + Tailwind CSS v4
 ```
 
-## Features
+## Backend-Features
 
 - Registrierung, Login, Logout, aktuellen Nutzer abrufen
 - E-Mail-Verifizierung nach der Registrierung (über Resend)
@@ -25,8 +38,19 @@ auth-starter/
 - Input-Validierung mit Zod
 - Zentrale Fehlerbehandlung (`AppError`) + 404-Handler
 - `role`-Feld am User (aktuell ungenutzt, aber vorbereitet)
-- Login/Registrierung als Split-Screen mit Tab-Umschalter (`frontend/src/components/AuthLayout.tsx`),
-  Passwort-Sichtbarkeits-Toggle (`PasswordInput.tsx`) und Passwort-Wiederholung bei der Registrierung
+
+## Frontend-Features
+
+- Login/Registrierung als Split-Screen mit Tab-Umschalter (`AuthLayout.tsx`) –
+  auf Mobile/Tablet (unter 1024px) verschwindet die linke Info-Seite komplett,
+  nur das Formular bleibt sichtbar und wird dort bewusst etwas größer dargestellt
+- Passwort-Sichtbarkeits-Toggle (Augen-Icon) bei jedem Passwortfeld
+- Passwort-Wiederholung bei Registrierung und beim Passwort-Ändern (mit Abgleich-Prüfung)
+- Passendes Frontend zu jedem Backend-Flow: Passwort vergessen, Passwort zurücksetzen,
+  E-Mail-Verifizierung, Konto-Seite (Passwort ändern, Konto löschen)
+- Logo (Icon + Name) in Dashboard/Konto ist klickbar und führt immer zurück zum Dashboard
+- Alle Buttons zeigen automatisch einen Pointer-Cursor (globale Regel in `theme.css`)
+- Austauschbares Platzhalter-Logo als echte Bilddatei (`Logo.tsx` + `public/logo-placeholder.svg`)
 
 ## Setup
 
@@ -64,22 +88,36 @@ Beide müssen gleichzeitig laufen.
 | POST    | `/api/auth/change-email`      | Neue E-Mail anfragen (Bestätigung nötig)     | Ja        |
 | DELETE  | `/api/auth/me`                | Konto löschen (Soft-Delete)                  | Ja        |
 
+## Wo du was anpassen kannst
+
+Jede Zeile unten ist im Code zusätzlich mit `// ANPASSEN:` markiert – im
+Editor danach suchen, um alle Stellen auf einen Blick zu sehen.
+
+| Was | Datei |
+|---|---|
+| Projektname (zentral) | `frontend/src/config.ts` (`APP_NAME`) |
+| Projektname (zwei Stellen, die `config.ts` nicht importieren können) | `frontend/index.html`, `backend/src/utils/sendEmail.ts` |
+| Logo-Bild | `frontend/public/logo-placeholder.svg` ersetzen (gleicher Dateiname reicht) |
+| Farben | `frontend/src/styles/theme.css` (`@theme`-Block, jede Farbe einzeln kommentiert) |
+| Schriftart | `frontend/index.html` (Google-Fonts-Link) + `theme.css` (`--font-sans`) |
+| Claim, Beschreibung, Bullet-Punkte (linke Seite) | `frontend/src/components/AuthLayout.tsx` |
+| Titel/Untertitel Login, Register | `frontend/src/pages/Login.tsx`, `Register.tsx` |
+| Texte auf den restlichen Auth-Seiten | `ForgotPassword.tsx`, `ResetPassword.tsx`, `VerifyEmail.tsx`, `Account.tsx` |
+| Wo die eigentliche App anfängt | `frontend/src/pages/Dashboard.tsx` |
+| Neue App-Routen | `frontend/src/App.tsx` |
+| Formular-Styling (Größen/Abstände) | `frontend/src/styles/formClasses.ts` |
+| Backend-URL für Produktion | `frontend/src/api/authApi.ts` (`VITE_API_URL`) |
+| Eigene Felder am User | `backend/src/models/User.ts` |
+| Alle Umgebungsvariablen erklärt | `backend/.env.example` |
+
 ## Wie du das für ein neues Projekt wiederverwendest
 
 1. Ganzen Ordner kopieren, in beiden `package.json`-Dateien den Namen anpassen
-2. Projektname zentral ändern: `APP_NAME` in `frontend/src/config.ts` setzen, dazu die zwei
-   Stellen, die keine `.ts`-Datei importieren können – `frontend/index.html` (`<title>`) und
-   `APP_NAME` in `backend/src/utils/sendEmail.ts` (steht an beiden Stellen als Kommentar dabei)
-3. In `frontend/src/components/AuthLayout.tsx` die drei Konstanten `HEADLINE`, `DESCRIPTION`
-   und `BULLETS` durch den echten Claim/Value-Pitch des Projekts ersetzen, sowie das Logo-Kürzel
-4. Backend: neue `MONGO_URI`, neuen `JWT_SECRET` und ein neues Resend-Projekt samt
+2. Die Tabelle oben durchgehen (oder im Editor nach `// ANPASSEN:` suchen) und
+   Projektname, Logo, Farben und Texte ersetzen
+3. Backend: neue `MONGO_URI`, neuen `JWT_SECRET` und ein neues Resend-Projekt samt
    `RESEND_API_KEY`/`MAIL_FROM` in `.env` eintragen (niemals Secrets wiederverwenden)
-5. `backend/src/models/User.ts` um projektspezifische Felder erweitern (z. B. Profilbild)
-6. Frontend: Farb-Tokens in `frontend/src/styles/theme.css` (im `@theme`-Block) an das neue
-   Projekt anpassen – jede `--color-*` Variable dort erzeugt automatisch die passenden
-   Tailwind-Utilities (z. B. wird aus `--color-primary` die Klasse `bg-primary`/`text-primary`)
-7. `frontend/src/pages/Dashboard.tsx` ist nur ein Platzhalter – hier fängt die eigentliche App an
-8. Falls E-Mail-Verifizierung erzwungen werden soll: `ENFORCE_EMAIL_VERIFICATION=true` setzen
+4. Falls E-Mail-Verifizierung erzwungen werden soll: `ENFORCE_EMAIL_VERIFICATION=true` setzen
    und `requireVerified`-Middleware (`backend/src/middleware/requireVerified.ts`) vor die
    betroffenen Routen hängen
 
@@ -115,3 +153,6 @@ Beide müssen gleichzeitig laufen.
 - **`ENFORCE_EMAIL_VERIFICATION`-Schalter** – während der Entwicklung oder solange
   Resend im Sandbox-Modus läuft, bleibt die Pflicht zur Verifizierung ausschaltbar,
   ohne den Code dafür zu ändern.
+- **Platzhalter-Logo als Bilddatei statt Text-Buchstabe** – so lässt sich ein
+  echtes Logo einfach durch Austauschen einer Datei einsetzen, ohne Komponenten
+  anzufassen.

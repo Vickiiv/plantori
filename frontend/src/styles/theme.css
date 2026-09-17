@@ -41,3 +41,12 @@ body {
   background-color: var(--color-canvas);
   color: var(--color-ink);
 }
+
+/* Zeigt bei allen (nicht deaktivierten) Buttons einen Pointer-Cursor -
+   der Browser-Standard fuer <button> ist sonst der normale Pfeil, nicht
+   die Hand. Gilt automatisch fuer jeden neuen Button, den du ergaenzt. */
+@layer base {
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
