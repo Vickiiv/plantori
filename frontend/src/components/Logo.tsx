@@ -1,4 +1,4 @@
-import { APP_NAME } from '../config';
+import { APP_NAME } from "../config";
 
 interface LogoProps {
   className?: string;
@@ -12,10 +12,10 @@ interface LogoProps {
 // oder den Dateinamen unten im src-Pfad anpassen. PNG/JPG funktionieren
 // genauso wie SVG.
 // ---------------------------------------------------------------------
-export function Logo({ className = 'h-9 w-9' }: LogoProps) {
+export function Logo({ className = "h-9 w-9" }: LogoProps) {
   return (
     <img
-      src="/logo-placeholder.svg"
+      src="/calendar.png"
       alt={`${APP_NAME} Logo`}
       className={`${className} rounded-lg object-cover`}
     />

@@ -1,27 +1,30 @@
-import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
-import { APP_NAME } from '../config';
-import { Logo } from './Logo';
+import { ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { APP_NAME } from "../config";
+import { Logo } from "./Logo";
 
 interface AuthLayoutProps {
-  activeTab: 'login' | 'register';
+  activeTab: "login" | "register";
   title: string;
   subtitle: string;
   children: ReactNode;
 }
 
-// ---------------------------------------------------------------------
-// ANPASSEN: Platzhalter-Inhalte fuer die linke Seite (nur ab "lg" sichtbar).
-// Diese drei Konstanten durch den echten Claim/Value-Pitch des Projekts
-// ersetzen. Das Logo-Kuerzel unten (aktuell "A") kommt automatisch aus
-// APP_NAME[0] - fuer ein echtes Logo-Bild stattdessen ein <img> einsetzen.
-// ---------------------------------------------------------------------
-const HEADLINE = 'Deine App in einem Satz.';
+const HEADLINE = "Plane deine Woche. Erreiche deine Ziele.";
 const DESCRIPTION =
-  'Kurze Beschreibung, was diese App macht und wem sie hilft - hier den echten Value-Pitch einsetzen.';
-const BULLETS = ['Erstes Kernfeature', 'Zweites Kernfeature', 'Drittes Kernfeature'];
+  "Plantori hilft dir, fokussiert zu bleiben und messbar voranzukommen - ohne Ablenkung, ohne Chaos";
+const BULLETS = [
+  "Wochenplanung auf einen Blick",
+  "Ziele mit Fortschrittsanzeige",
+  "Integrierter Fokus-Timer",
+];
 
-export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutProps) {
+export function AuthLayout({
+  activeTab,
+  title,
+  subtitle,
+  children,
+}: AuthLayoutProps) {
   return (
     <div className="flex min-h-screen">
       {/* Linke Seite: nur ab "lg" (1024px) sichtbar - auf Mobile/Tablet
@@ -34,12 +37,17 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
 
         <div>
           <h1 className="mb-4 text-3xl font-bold leading-tight">{HEADLINE}</h1>
-          <p className="max-w-sm text-[15px] leading-relaxed text-white/85">{DESCRIPTION}</p>
+          <p className="max-w-sm text-[15px] leading-relaxed text-white/85">
+            {DESCRIPTION}
+          </p>
         </div>
 
         <ul className="flex flex-col gap-3.5">
           {BULLETS.map((bullet) => (
-            <li key={bullet} className="flex items-center gap-2.5 text-sm font-medium">
+            <li
+              key={bullet}
+              className="flex items-center gap-2.5 text-sm font-medium"
+            >
               <span className="flex h-[22px] w-[22px] flex-shrink-0 items-center justify-center rounded-full bg-white/20">
                 <CheckIcon />
               </span>
@@ -69,7 +77,9 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
             <Link
               to="/login"
               className={`flex-1 rounded-full py-2.5 text-center text-sm font-medium transition-colors ${
-                activeTab === 'login' ? 'bg-surface text-primary shadow-sm' : 'text-muted'
+                activeTab === "login"
+                  ? "bg-surface text-primary shadow-sm"
+                  : "text-muted"
               }`}
             >
               Anmelden
@@ -77,7 +87,9 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
             <Link
               to="/register"
               className={`flex-1 rounded-full py-2.5 text-center text-sm font-medium transition-colors ${
-                activeTab === 'register' ? 'bg-surface text-primary shadow-sm' : 'text-muted'
+                activeTab === "register"
+                  ? "bg-surface text-primary shadow-sm"
+                  : "text-muted"
               }`}
             >
               Registrieren
@@ -93,7 +105,16 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
 
 function CheckIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );

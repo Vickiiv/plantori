@@ -15,11 +15,11 @@
  */
 @theme {
   /* Hauptfarbe: Buttons, aktiver Tab, linkes Seitenpanel, Links */
-  --color-primary: #7c6fd1;
+  --color-primary: #1c1830;
   /* Hover-/Fokus-Variante der Hauptfarbe (etwas dunkler) */
-  --color-primary-dark: #5b4fc4;
+  --color-primary-dark: #2a2448;
   /* Seitenhintergrund (hinter Karten/Formularen) */
-  --color-canvas: #faf8f4;
+  --color-canvas: #f5f4f8;
   /* Hintergrund von Karten, Inputs, Headern - i. d. R. Weiss */
   --color-surface: #ffffff;
   /* Haupt-Textfarbe (Ueberschriften, Fliesstext) */
@@ -27,13 +27,13 @@
   /* Gedaempfte Textfarbe (Hilfetexte, Platzhalter, sekundaere Labels) */
   --color-muted: #6b6860;
   /* Reserve-Akzentfarbe - aktuell ungenutzt, fuer Hervorhebungen gedacht */
-  --color-accent: #e08a6b;
+  --color-accent: #b077d1;
   /* Rahmenfarbe fuer Inputs, Karten, Trennlinien */
-  --color-line: #e5e1d8;
+  --color-line: #d7d5e0;
   /* Fehler- und Lösch-Aktionen (z.B. "Konto loeschen") */
   --color-danger: #c94f4f;
   /* Schriftart - siehe auch den Google-Fonts-Link in index.html */
-  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-sans: "Inter", -apple-system, sans-serif;
 }
 
 body {
