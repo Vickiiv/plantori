@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/AuthLayout';
 import { PasswordInput } from '../components/PasswordInput';
+import { errorClass, inputClass, labelClass, linkClass, submitButtonClass, switchTextClass } from '../styles/formClasses';
 
 export function Register() {
   const { register } = useAuth();
@@ -33,10 +34,10 @@ export function Register() {
   return (
     <AuthLayout activeTab="register" title="Konto erstellen" subtitle="Starte jetzt mit App-Name.">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        <label htmlFor="name" className={labelClass}>Name</label>
+        <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required className={inputClass} />
 
-        <label htmlFor="email">E-Mail</label>
+        <label htmlFor="email" className={labelClass}>E-Mail</label>
         <input
           id="email"
           type="email"
@@ -44,9 +45,10 @@ export function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className={inputClass}
         />
 
-        <label htmlFor="password">Passwort</label>
+        <label htmlFor="password" className={labelClass}>Passwort</label>
         <PasswordInput
           id="password"
           value={password}
@@ -55,7 +57,7 @@ export function Register() {
           minLength={8}
         />
 
-        <label htmlFor="passwordConfirm">Passwort wiederholen</label>
+        <label htmlFor="passwordConfirm" className={labelClass}>Passwort wiederholen</label>
         <PasswordInput
           id="passwordConfirm"
           value={passwordConfirm}
@@ -64,12 +66,12 @@ export function Register() {
           minLength={8}
         />
 
-        {error && <p className="auth-error">{error}</p>}
+        {error && <p className={errorClass}>{error}</p>}
 
-        <button type="submit">Registrieren</button>
+        <button type="submit" className={submitButtonClass}>Registrieren</button>
 
-        <p className="auth-switch">
-          Schon ein Konto? <Link to="/login">Anmelden</Link>
+        <p className={switchTextClass}>
+          Schon ein Konto? <Link to="/login" className={linkClass}>Anmelden</Link>
         </p>
       </form>
     </AuthLayout>

@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { changePasswordRequest, deleteAccountRequest } from '../api/authApi';
+import { errorClass, inputClass, labelClass, messageClass } from '../styles/formClasses';
 
 export function Account() {
   const { user, logout } = useAuth();
@@ -42,32 +43,33 @@ export function Account() {
   }
 
   return (
-    <div className="dashboard-page">
-      <header className="dashboard-header">
-        <span className="dashboard-logo">App-Name</span>
-        <button className="link-button" onClick={() => logout()}>Abmelden</button>
+    <div className="min-h-screen">
+      <header className="flex items-center justify-between border-b border-line bg-surface px-8 py-5">
+        <span className="text-lg font-semibold text-primary-dark">App-Name</span>
+        <button className="text-sm text-muted hover:text-ink" onClick={() => logout()}>Abmelden</button>
       </header>
 
-      <main className="dashboard-content">
-        <h1>Konto</h1>
-        <p className="dashboard-hint">
+      <main className="mx-auto max-w-2xl px-6 py-16">
+        <h1 className="text-2xl font-semibold text-ink">Konto</h1>
+        <p className="mt-4 text-muted">
           Angemeldet als {user?.email}
           {!user?.isVerified && ' · E-Mail nicht bestätigt'}
         </p>
 
-        <section style={{ marginTop: 32 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 500 }}>Passwort ändern</h2>
-          <form onSubmit={handlePasswordChange} className="account-form">
-            <label htmlFor="currentPassword">Aktuelles Passwort</label>
+        <section className="mt-8">
+          <h2 className="text-lg font-medium text-ink">Passwort ändern</h2>
+          <form onSubmit={handlePasswordChange} className="mt-4 flex max-w-sm flex-col">
+            <label htmlFor="currentPassword" className={labelClass}>Aktuelles Passwort</label>
             <input
               id="currentPassword"
               type="password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               required
+              className={inputClass}
             />
 
-            <label htmlFor="newPassword">Neues Passwort</label>
+            <label htmlFor="newPassword" className={labelClass}>Neues Passwort</label>
             <input
               id="newPassword"
               type="password"
@@ -75,40 +77,53 @@ export function Account() {
               onChange={(e) => setNewPassword(e.target.value)}
               required
               minLength={8}
+              className={inputClass}
             />
 
-            {passwordError && <p className="auth-error">{passwordError}</p>}
-            {passwordMessage && <p className="auth-message">{passwordMessage}</p>}
+            {passwordError && <p className={errorClass}>{passwordError}</p>}
+            {passwordMessage && <p className={messageClass}>{passwordMessage}</p>}
 
-            <button type="submit">Passwort ändern</button>
+            <button
+              type="submit"
+              className="mt-4 w-fit rounded-lg bg-primary px-5 py-2.5 font-medium text-white hover:bg-primary-dark"
+            >
+              Passwort ändern
+            </button>
           </form>
         </section>
 
-        <section style={{ marginTop: 40 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 500, color: 'var(--color-error)' }}>Konto löschen</h2>
-          <p className="dashboard-hint">Das kann nicht rückgängig gemacht werden.</p>
+        <section className="mt-10">
+          <h2 className="text-lg font-medium text-danger">Konto löschen</h2>
+          <p className="mt-1 text-muted">Das kann nicht rückgängig gemacht werden.</p>
 
           {!confirmDelete ? (
-            <button className="danger-button" onClick={() => setConfirmDelete(true)}>
+            <button
+              onClick={() => setConfirmDelete(true)}
+              className="mt-4 rounded-lg border border-danger px-5 py-2.5 font-medium text-danger hover:bg-danger hover:text-white"
+            >
               Konto löschen
             </button>
           ) : (
-            <div className="account-form">
-              <label htmlFor="deletePassword">Passwort zur Bestätigung</label>
+            <div className="mt-4 flex max-w-sm flex-col">
+              <label htmlFor="deletePassword" className={labelClass}>Passwort zur Bestätigung</label>
               <input
                 id="deletePassword"
                 type="password"
                 value={deletePassword}
                 onChange={(e) => setDeletePassword(e.target.value)}
+                className={inputClass}
               />
 
-              {deleteError && <p className="auth-error">{deleteError}</p>}
+              {deleteError && <p className={errorClass}>{deleteError}</p>}
 
-              <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
-                <button className="danger-button" onClick={handleDelete}>
+              <div className="mt-3 flex gap-3">
+                <button
+                  onClick={handleDelete}
+                  className="rounded-lg border border-danger px-5 py-2.5 font-medium text-danger hover:bg-danger hover:text-white"
+                >
                   Endgültig löschen
                 </button>
-                <button className="link-button" onClick={() => setConfirmDelete(false)}>
+                <button onClick={() => setConfirmDelete(false)} className="text-sm text-muted hover:text-ink">
                   Abbrechen
                 </button>
               </div>

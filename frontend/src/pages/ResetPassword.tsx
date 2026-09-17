@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { resetPasswordRequest } from '../api/authApi';
+import { cardClass, cardPageClass, errorClass, inputClass, labelClass, linkClass, messageClass, submitButtonClass } from '../styles/formClasses';
 
 export function ResetPassword() {
   const [searchParams] = useSearchParams();
@@ -29,20 +30,20 @@ export function ResetPassword() {
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <h1>Neues Passwort vergeben</h1>
+    <div className={cardPageClass}>
+      <div className={cardClass}>
+        <h1 className="mb-6 text-2xl font-bold text-ink">Neues Passwort vergeben</h1>
 
         {isSuccess ? (
           <>
-            <p className="auth-message">Dein Passwort wurde geändert. Du kannst dich jetzt anmelden.</p>
-            <p className="auth-switch">
-              <Link to="/login">Zum Login</Link>
+            <p className={messageClass}>Dein Passwort wurde geändert. Du kannst dich jetzt anmelden.</p>
+            <p className="mt-6 text-center text-sm">
+              <Link to="/login" className={linkClass}>Zum Login</Link>
             </p>
           </>
         ) : (
           <form onSubmit={handleSubmit}>
-            <label htmlFor="newPassword">Neues Passwort</label>
+            <label htmlFor="newPassword" className={labelClass}>Neues Passwort</label>
             <input
               id="newPassword"
               type="password"
@@ -50,11 +51,12 @@ export function ResetPassword() {
               onChange={(e) => setNewPassword(e.target.value)}
               required
               minLength={8}
+              className={inputClass}
             />
 
-            {error && <p className="auth-error">{error}</p>}
+            {error && <p className={errorClass}>{error}</p>}
 
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit" disabled={isSubmitting} className={submitButtonClass}>
               {isSubmitting ? 'Wird gespeichert …' : 'Passwort speichern'}
             </button>
           </form>

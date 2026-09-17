@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { forgotPasswordRequest } from '../api/authApi';
+import { cardClass, cardPageClass, errorClass, inputClass, labelClass, linkClass, messageClass, submitButtonClass } from '../styles/formClasses';
 
 export function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -23,28 +24,28 @@ export function ForgotPassword() {
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <h1>Passwort vergessen</h1>
-        <p className="auth-subtitle">Wir schicken dir einen Link zum Zurücksetzen</p>
+    <div className={cardPageClass}>
+      <div className={cardClass}>
+        <h1 className="mb-1.5 text-2xl font-bold text-ink">Passwort vergessen</h1>
+        <p className="mb-6 text-sm text-muted">Wir schicken dir einen Link zum Zurücksetzen</p>
 
         {message ? (
-          <p className="auth-message">{message}</p>
+          <p className={messageClass}>{message}</p>
         ) : (
           <form onSubmit={handleSubmit}>
-            <label htmlFor="email">E-Mail</label>
-            <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <label htmlFor="email" className={labelClass}>E-Mail</label>
+            <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className={inputClass} />
 
-            {error && <p className="auth-error">{error}</p>}
+            {error && <p className={errorClass}>{error}</p>}
 
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit" disabled={isSubmitting} className={submitButtonClass}>
               {isSubmitting ? 'Wird gesendet …' : 'Link anfordern'}
             </button>
           </form>
         )}
 
-        <p className="auth-switch">
-          <Link to="/login">Zurück zum Login</Link>
+        <p className="mt-6 text-center text-sm">
+          <Link to="/login" className={linkClass}>Zurück zum Login</Link>
         </p>
       </div>
     </div>

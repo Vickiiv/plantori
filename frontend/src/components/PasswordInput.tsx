@@ -1,19 +1,24 @@
 import { useState, InputHTMLAttributes } from 'react';
+import { inputClass } from '../styles/formClasses';
 
 type PasswordInputProps = InputHTMLAttributes<HTMLInputElement>;
 
-export function PasswordInput(props: PasswordInputProps) {
+export function PasswordInput({ className, ...props }: PasswordInputProps) {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div className="password-input-wrapper">
-      <input {...props} type={visible ? 'text' : 'password'} />
+    <div className="relative">
+      <input
+        {...props}
+        type={visible ? 'text' : 'password'}
+        className={`${inputClass} pr-11 ${className ?? ''}`}
+      />
       <button
         type="button"
-        className="password-toggle"
         onClick={() => setVisible((v) => !v)}
         aria-label={visible ? 'Passwort verbergen' : 'Passwort anzeigen'}
         tabIndex={-1}
+        className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded p-1 text-muted hover:text-ink"
       >
         {visible ? <EyeOffIcon /> : <EyeIcon />}
       </button>

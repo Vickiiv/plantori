@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/AuthLayout';
 import { PasswordInput } from '../components/PasswordInput';
+import { errorClass, inputClass, labelClass, linkClass, submitButtonClass, switchTextClass } from '../styles/formClasses';
 
 export function Login() {
   const { login } = useAuth();
@@ -25,7 +26,7 @@ export function Login() {
   return (
     <AuthLayout activeTab="login" title="Willkommen zurück" subtitle="Melde dich an, um weiterzumachen.">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">E-Mail</label>
+        <label htmlFor="email" className={labelClass}>E-Mail</label>
         <input
           id="email"
           type="email"
@@ -33,26 +34,22 @@ export function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className={inputClass}
         />
 
-        <label htmlFor="password">Passwort</label>
-        <PasswordInput
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <label htmlFor="password" className={labelClass}>Passwort</label>
+        <PasswordInput id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
-        <p className="auth-forgot">
-          <Link to="/forgot-password">Passwort vergessen?</Link>
+        <p className="mt-2 text-right text-sm">
+          <Link to="/forgot-password" className={linkClass}>Passwort vergessen?</Link>
         </p>
 
-        {error && <p className="auth-error">{error}</p>}
+        {error && <p className={errorClass}>{error}</p>}
 
-        <button type="submit">Anmelden</button>
+        <button type="submit" className={submitButtonClass}>Anmelden</button>
 
-        <p className="auth-switch">
-          Noch kein Konto? <Link to="/register">Registrieren</Link>
+        <p className={switchTextClass}>
+          Noch kein Konto? <Link to="/register" className={linkClass}>Registrieren</Link>
         </p>
       </form>
     </AuthLayout>

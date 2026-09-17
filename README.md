@@ -9,7 +9,7 @@ jedes Mal neu zu bauen.
 ```
 auth-starter/
 ├── backend/     Express + TypeScript + MongoDB/Mongoose, JWT-Auth über httpOnly-Cookies
-└── frontend/    React + TypeScript (Vite), Auth-Seiten als Platzhalter-Design
+└── frontend/    React + TypeScript (Vite) + Tailwind CSS v4
 ```
 
 ## Features
@@ -74,8 +74,9 @@ Beide müssen gleichzeitig laufen.
 4. Backend: neue `MONGO_URI`, neuen `JWT_SECRET` und ein neues Resend-Projekt samt
    `RESEND_API_KEY`/`MAIL_FROM` in `.env` eintragen (niemals Secrets wiederverwenden)
 5. `backend/src/models/User.ts` um projektspezifische Felder erweitern (z. B. Profilbild)
-6. Frontend: `frontend/src/styles/theme.css` an Farben/Typografie des neuen Projekts anpassen
-   (Farbe der linken Seite hängt an `--color-primary`)
+6. Frontend: Farb-Tokens in `frontend/src/styles/theme.css` (im `@theme`-Block) an das neue
+   Projekt anpassen – jede `--color-*` Variable dort erzeugt automatisch die passenden
+   Tailwind-Utilities (z. B. wird aus `--color-primary` die Klasse `bg-primary`/`text-primary`)
 7. `frontend/src/pages/Dashboard.tsx` ist nur ein Platzhalter – hier fängt die eigentliche App an
 8. Falls E-Mail-Verifizierung erzwungen werden soll: `ENFORCE_EMAIL_VERIFICATION=true` setzen
    und `requireVerified`-Middleware (`backend/src/middleware/requireVerified.ts`) vor die
