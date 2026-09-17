@@ -67,8 +67,9 @@ Beide müssen gleichzeitig laufen.
 ## Wie du das für ein neues Projekt wiederverwendest
 
 1. Ganzen Ordner kopieren, in beiden `package.json`-Dateien den Namen anpassen
-2. Projektweit nach `App-Name` suchen und durch den echten Projektnamen ersetzen
-   (steckt in `index.html`, den Auth-Seiten und den Email-Templates in `sendEmail.ts`)
+2. Projektname zentral ändern: `APP_NAME` in `frontend/src/config.ts` setzen, dazu die zwei
+   Stellen, die keine `.ts`-Datei importieren können – `frontend/index.html` (`<title>`) und
+   `APP_NAME` in `backend/src/utils/sendEmail.ts` (steht an beiden Stellen als Kommentar dabei)
 3. In `frontend/src/components/AuthLayout.tsx` die drei Konstanten `HEADLINE`, `DESCRIPTION`
    und `BULLETS` durch den echten Claim/Value-Pitch des Projekts ersetzen, sowie das Logo-Kürzel
 4. Backend: neue `MONGO_URI`, neuen `JWT_SECRET` und ein neues Resend-Projekt samt

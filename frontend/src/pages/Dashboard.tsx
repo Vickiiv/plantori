@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { APP_NAME } from '../config';
 import { messageClass } from '../styles/formClasses';
 
 export function Dashboard() {
@@ -8,7 +9,7 @@ export function Dashboard() {
   return (
     <div className="min-h-screen">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-surface px-4 py-4 sm:px-8 sm:py-5">
-        <span className="text-lg font-semibold text-primary-dark">App-Name</span>
+        <span className="text-lg font-semibold text-primary-dark">{APP_NAME}</span>
         <div className="flex items-center gap-4">
           <Link className="text-sm text-muted hover:text-ink" to="/account">Konto</Link>
           <button className="text-sm text-muted hover:text-ink" onClick={() => logout()}>Abmelden</button>

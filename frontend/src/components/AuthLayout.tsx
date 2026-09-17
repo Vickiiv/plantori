@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { APP_NAME } from '../config';
 
 interface AuthLayoutProps {
   activeTab: 'login' | 'register';
@@ -8,8 +9,12 @@ interface AuthLayoutProps {
   children: ReactNode;
 }
 
-// Platzhalter-Inhalte fuer die linke Seite - beim Anpassen fuer ein
-// konkretes Projekt einfach diese drei Konstanten ersetzen.
+// ---------------------------------------------------------------------
+// ANPASSEN: Platzhalter-Inhalte fuer die linke Seite (nur ab "lg" sichtbar).
+// Diese drei Konstanten durch den echten Claim/Value-Pitch des Projekts
+// ersetzen. Das Logo-Kuerzel unten (aktuell "A") kommt automatisch aus
+// APP_NAME[0] - fuer ein echtes Logo-Bild stattdessen ein <img> einsetzen.
+// ---------------------------------------------------------------------
 const HEADLINE = 'Deine App in einem Satz.';
 const DESCRIPTION =
   'Kurze Beschreibung, was diese App macht und wem sie hilft - hier den echten Value-Pitch einsetzen.';
@@ -18,12 +23,14 @@ const BULLETS = ['Erstes Kernfeature', 'Zweites Kernfeature', 'Drittes Kernfeatu
 export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutProps) {
   return (
     <div className="flex min-h-screen">
+      {/* Linke Seite: nur ab "lg" (1024px) sichtbar - auf Mobile/Tablet
+          komplett ausgeblendet, dort zeigt nur das rechte Formular. */}
       <aside className="hidden w-[42%] min-w-[320px] flex-col justify-between bg-primary p-8 text-white lg:flex xl:p-12">
         <div className="flex items-center gap-2.5 text-lg font-semibold">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-sm font-bold">
-            A
+            {APP_NAME[0]}
           </span>
-          <span>App-Name</span>
+          <span>{APP_NAME}</span>
         </div>
 
         <div>
@@ -43,17 +50,23 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
         </ul>
       </aside>
 
+      {/* Rechte Seite / einzige Seite auf Mobile: das eigentliche Formular.
+          max-w ist auf Mobile/Tablet groesszuegiger (420px) als auf Desktop
+          (400px), weil dort keine linke Seite mehr um Platz konkurriert. */}
       <main className="flex flex-1 items-center justify-center bg-canvas p-6">
-        <div className="w-full max-w-[400px]">
-          <div className="mb-6 flex items-center justify-center gap-2 lg:hidden">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
-              A
+        <div className="w-full max-w-[420px] lg:max-w-[400px]">
+          {/* Kompaktes Logo nur auf Mobile/Tablet, da die linke Seite dort fehlt */}
+          <div className="mb-8 flex items-center justify-center gap-2 lg:hidden">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
+              {APP_NAME[0]}
             </span>
-            <span className="text-base font-semibold text-ink">App-Name</span>
+            <span className="text-lg font-semibold text-ink">{APP_NAME}</span>
           </div>
 
-          <h2 className="mb-1.5 text-[26px] font-bold text-ink">{title}</h2>
-          <p className="mb-6 text-sm text-muted">{subtitle}</p>
+          <h2 className="mb-1.5 text-[28px] font-bold leading-tight text-ink lg:text-[26px] lg:leading-normal">
+            {title}
+          </h2>
+          <p className="mb-6 text-[15px] text-muted">{subtitle}</p>
 
           <div className="mb-1 flex rounded-full border border-line bg-canvas p-1">
             <Link

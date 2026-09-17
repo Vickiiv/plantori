@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { changePasswordRequest, deleteAccountRequest } from '../api/authApi';
+import { APP_NAME } from '../config';
 import { errorClass, inputClass, labelClass, messageClass } from '../styles/formClasses';
 
 export function Account() {
@@ -45,7 +46,7 @@ export function Account() {
   return (
     <div className="min-h-screen">
       <header className="flex items-center justify-between border-b border-line bg-surface px-4 py-4 sm:px-8 sm:py-5">
-        <span className="text-lg font-semibold text-primary-dark">App-Name</span>
+        <span className="text-lg font-semibold text-primary-dark">{APP_NAME}</span>
         <button className="text-sm text-muted hover:text-ink" onClick={() => logout()}>Abmelden</button>
       </header>
 

@@ -1,16 +1,25 @@
-// Wiederverwendbare Tailwind-Klassen fuer Formulare. Keine eigene CSS-Datei -
-// nur eine DRY-Buendelung der immer gleichen Utility-Kombination.
+// ---------------------------------------------------------------------
+// ANPASSEN: Wiederverwendbare Tailwind-Klassen fuer Formulare. Keine
+// eigene CSS-Datei - nur eine DRY-Buendelung der immer gleichen
+// Utility-Kombination. Farben kommen aus den Tokens in theme.css
+// (bg-primary, text-ink, ...) - hier nur Groessen/Abstaende/Struktur
+// aendern, Farben lieber zentral in theme.css anpassen.
+// ---------------------------------------------------------------------
+
 export const labelClass = 'mb-1.5 mt-4 block text-[13px] font-medium text-ink';
 
+// bg-surface ist WICHTIG: ohne explizite Hintergrundfarbe setzt Tailwinds
+// CSS-Reset (Preflight) bei <input> automatisch "transparent", dann
+// schimmert der Seitenhintergrund durch statt eines weissen Feldes.
 export const inputClass =
-  'w-full rounded-[10px] border border-line bg-surface px-3.5 py-3 text-base text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20';
+  'w-full rounded-[10px] border border-line bg-surface px-3.5 py-3.5 text-base text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20';
 
 export const errorClass = 'mt-2.5 text-sm text-danger';
 
 export const messageClass = 'mt-4 rounded-lg border border-line bg-canvas p-3 text-sm text-ink';
 
 export const submitButtonClass =
-  'mt-5 w-full rounded-[10px] bg-primary py-3 text-[15px] font-semibold text-white transition-colors hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60';
+  'mt-5 w-full rounded-[10px] bg-primary py-3.5 text-base font-semibold text-white transition-colors hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60';
 
 export const switchTextClass = 'mt-5 text-center text-sm text-muted';
 

@@ -2,6 +2,8 @@ import { Resend } from 'resend';
 import { env } from '../config/env';
 
 const resend = new Resend(env.RESEND_API_KEY);
+// ANPASSEN: Projektname fuer die Email-Texte hier UND in
+// frontend/src/config.ts (APP_NAME) aendern.
 const APP_NAME = 'App-Name';
 
 function wrapEmailHtml(heading: string, bodyHtml: string): string {

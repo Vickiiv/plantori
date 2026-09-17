@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/AuthLayout';
 import { PasswordInput } from '../components/PasswordInput';
+import { APP_NAME } from '../config';
 import { errorClass, inputClass, labelClass, linkClass, submitButtonClass, switchTextClass } from '../styles/formClasses';
 
 export function Register() {
@@ -32,7 +33,7 @@ export function Register() {
   }
 
   return (
-    <AuthLayout activeTab="register" title="Konto erstellen" subtitle="Starte jetzt mit App-Name.">
+    <AuthLayout activeTab="register" title="Konto erstellen" subtitle={`Starte jetzt mit ${APP_NAME}.`}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name" className={labelClass}>Name</label>
         <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required className={inputClass} />
