@@ -16,7 +16,7 @@ export function Dashboard() {
       </header>
 
       <main className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-16">
-        <h1 className="text-xl font-semibold text-ink sm:text-2xl break-words">Schön, dass du da bist, {user?.name}</h1>
+        <h1 className="text-2xl font-semibold text-ink break-words">Schön, dass du da bist, {user?.name}</h1>
 
         {!user?.isVerified && (
           <p className={messageClass}>Bitte bestätige deine E-Mail-Adresse – schau in dein Postfach.</p>

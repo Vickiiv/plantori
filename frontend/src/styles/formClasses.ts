@@ -3,7 +3,7 @@
 export const labelClass = 'mb-1.5 mt-4 block text-[13px] font-medium text-ink';
 
 export const inputClass =
-  'w-full rounded-[10px] border border-line px-3.5 py-2.5 text-base text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20';
+  'w-full rounded-[10px] border border-line bg-surface px-3.5 py-3 text-base text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary/20';
 
 export const errorClass = 'mt-2.5 text-sm text-danger';
 
@@ -16,6 +16,6 @@ export const switchTextClass = 'mt-5 text-center text-sm text-muted';
 
 export const linkClass = 'font-medium text-primary';
 
-export const cardPageClass = 'flex min-h-screen items-center justify-center bg-canvas p-4 sm:p-6';
+export const cardPageClass = 'flex min-h-screen items-center justify-center bg-canvas p-6';
 
 export const cardClass = 'w-full max-w-[380px] rounded-2xl border border-line bg-surface p-6 sm:p-8';

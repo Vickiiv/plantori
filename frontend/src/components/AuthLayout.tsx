@@ -43,7 +43,7 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
         </ul>
       </aside>
 
-      <main className="flex flex-1 items-center justify-center bg-canvas p-4 sm:p-6">
+      <main className="flex flex-1 items-center justify-center bg-canvas p-6">
         <div className="w-full max-w-[400px]">
           <div className="mb-6 flex items-center justify-center gap-2 lg:hidden">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
@@ -52,7 +52,7 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
             <span className="text-base font-semibold text-ink">App-Name</span>
           </div>
 
-          <h2 className="mb-1.5 text-2xl font-bold text-ink sm:text-[26px]">{title}</h2>
+          <h2 className="mb-1.5 text-[26px] font-bold text-ink">{title}</h2>
           <p className="mb-6 text-sm text-muted">{subtitle}</p>
 
           <div className="mb-1 flex rounded-full border border-line bg-canvas p-1">
