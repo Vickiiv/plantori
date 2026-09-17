@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { APP_NAME } from '../config';
 import { Logo } from '../components/Logo';
-import { messageClass } from '../styles/formClasses';
 
 export function Dashboard() {
   const { user, logout } = useAuth();
@@ -25,7 +24,7 @@ export function Dashboard() {
         <h1 className="text-2xl font-semibold text-ink break-words">Schön, dass du da bist, {user?.name}</h1>
 
         {!user?.isVerified && (
-          <p className={messageClass}>Bitte bestätige deine E-Mail-Adresse – schau in dein Postfach.</p>
+          <p className="mt-2 text-sm text-muted">E-Mail-Adresse noch nicht bestätigt – schau in dein Postfach.</p>
         )}
 
         {/* ANPASSEN: Ab hier faengt die eigentliche App an - dieser gesamte
