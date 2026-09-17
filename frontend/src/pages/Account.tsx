@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { changePasswordRequest, deleteAccountRequest } from '../api/authApi';
 import { APP_NAME } from '../config';
-import { errorClass, inputClass, labelClass, messageClass } from '../styles/formClasses';
+import { PasswordInput } from '../components/PasswordInput';
+import { errorClass, labelClass, messageClass } from '../styles/formClasses';
 
 export function Account() {
   const { user, logout } = useAuth();
@@ -11,6 +12,7 @@ export function Account() {
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
@@ -22,11 +24,18 @@ export function Account() {
     e.preventDefault();
     setPasswordError('');
     setPasswordMessage('');
+
+    if (newPassword !== newPasswordConfirm) {
+      setPasswordError('Die neuen Passwörter stimmen nicht überein.');
+      return;
+    }
+
     try {
       const data = await changePasswordRequest(currentPassword, newPassword);
       setPasswordMessage(data.message);
       setCurrentPassword('');
       setNewPassword('');
+      setNewPasswordConfirm('');
     } catch (err) {
       setPasswordError(err instanceof Error ? err.message : 'Etwas ist schiefgelaufen');
     }
@@ -61,24 +70,29 @@ export function Account() {
           <h2 className="text-lg font-medium text-ink">Passwort ändern</h2>
           <form onSubmit={handlePasswordChange} className="mt-4 flex max-w-sm flex-col">
             <label htmlFor="currentPassword" className={labelClass}>Aktuelles Passwort</label>
-            <input
+            <PasswordInput
               id="currentPassword"
-              type="password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               required
-              className={inputClass}
             />
 
             <label htmlFor="newPassword" className={labelClass}>Neues Passwort</label>
-            <input
+            <PasswordInput
               id="newPassword"
-              type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
               minLength={8}
-              className={inputClass}
+            />
+
+            <label htmlFor="newPasswordConfirm" className={labelClass}>Neues Passwort wiederholen</label>
+            <PasswordInput
+              id="newPasswordConfirm"
+              value={newPasswordConfirm}
+              onChange={(e) => setNewPasswordConfirm(e.target.value)}
+              required
+              minLength={8}
             />
 
             {passwordError && <p className={errorClass}>{passwordError}</p>}
@@ -107,12 +121,10 @@ export function Account() {
           ) : (
             <div className="mt-4 flex max-w-sm flex-col">
               <label htmlFor="deletePassword" className={labelClass}>Passwort zur Bestätigung</label>
-              <input
+              <PasswordInput
                 id="deletePassword"
-                type="password"
                 value={deletePassword}
                 onChange={(e) => setDeletePassword(e.target.value)}
-                className={inputClass}
               />
 
               {deleteError && <p className={errorClass}>{deleteError}</p>}
