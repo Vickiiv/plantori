@@ -7,7 +7,7 @@ export function Dashboard() {
 
   return (
     <div className="min-h-screen">
-      <header className="flex items-center justify-between border-b border-line bg-surface px-8 py-5">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-surface px-4 py-4 sm:px-8 sm:py-5">
         <span className="text-lg font-semibold text-primary-dark">App-Name</span>
         <div className="flex items-center gap-4">
           <Link className="text-sm text-muted hover:text-ink" to="/account">Konto</Link>
@@ -15,8 +15,8 @@ export function Dashboard() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-2xl px-6 py-16">
-        <h1 className="text-2xl font-semibold text-ink">Schön, dass du da bist, {user?.name}</h1>
+      <main className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-16">
+        <h1 className="text-xl font-semibold text-ink sm:text-2xl break-words">Schön, dass du da bist, {user?.name}</h1>
 
         {!user?.isVerified && (
           <p className={messageClass}>Bitte bestätige deine E-Mail-Adresse – schau in dein Postfach.</p>

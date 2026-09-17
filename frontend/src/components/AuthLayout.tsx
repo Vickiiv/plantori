@@ -18,7 +18,7 @@ const BULLETS = ['Erstes Kernfeature', 'Zweites Kernfeature', 'Drittes Kernfeatu
 export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutProps) {
   return (
     <div className="flex min-h-screen">
-      <aside className="hidden w-[42%] min-w-[320px] flex-col justify-between bg-primary p-12 text-white lg:flex">
+      <aside className="hidden w-[42%] min-w-[320px] flex-col justify-between bg-primary p-8 text-white lg:flex xl:p-12">
         <div className="flex items-center gap-2.5 text-lg font-semibold">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-sm font-bold">
             A
@@ -43,9 +43,16 @@ export function AuthLayout({ activeTab, title, subtitle, children }: AuthLayoutP
         </ul>
       </aside>
 
-      <main className="flex flex-1 items-center justify-center bg-canvas p-6">
+      <main className="flex flex-1 items-center justify-center bg-canvas p-4 sm:p-6">
         <div className="w-full max-w-[400px]">
-          <h2 className="mb-1.5 text-[26px] font-bold text-ink">{title}</h2>
+          <div className="mb-6 flex items-center justify-center gap-2 lg:hidden">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
+              A
+            </span>
+            <span className="text-base font-semibold text-ink">App-Name</span>
+          </div>
+
+          <h2 className="mb-1.5 text-2xl font-bold text-ink sm:text-[26px]">{title}</h2>
           <p className="mb-6 text-sm text-muted">{subtitle}</p>
 
           <div className="mb-1 flex rounded-full border border-line bg-canvas p-1">

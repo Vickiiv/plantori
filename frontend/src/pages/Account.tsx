@@ -44,14 +44,14 @@ export function Account() {
 
   return (
     <div className="min-h-screen">
-      <header className="flex items-center justify-between border-b border-line bg-surface px-8 py-5">
+      <header className="flex items-center justify-between border-b border-line bg-surface px-4 py-4 sm:px-8 sm:py-5">
         <span className="text-lg font-semibold text-primary-dark">App-Name</span>
         <button className="text-sm text-muted hover:text-ink" onClick={() => logout()}>Abmelden</button>
       </header>
 
-      <main className="mx-auto max-w-2xl px-6 py-16">
-        <h1 className="text-2xl font-semibold text-ink">Konto</h1>
-        <p className="mt-4 text-muted">
+      <main className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-16">
+        <h1 className="text-xl font-semibold text-ink sm:text-2xl">Konto</h1>
+        <p className="mt-4 break-words text-muted">
           Angemeldet als {user?.email}
           {!user?.isVerified && ' · E-Mail nicht bestätigt'}
         </p>
@@ -116,7 +116,7 @@ export function Account() {
 
               {deleteError && <p className={errorClass}>{deleteError}</p>}
 
-              <div className="mt-3 flex gap-3">
+              <div className="mt-3 flex flex-wrap gap-3">
                 <button
                   onClick={handleDelete}
                   className="rounded-lg border border-danger px-5 py-2.5 font-medium text-danger hover:bg-danger hover:text-white"
